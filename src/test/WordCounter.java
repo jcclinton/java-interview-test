@@ -5,15 +5,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Calculates word frequency in the input text collection. Note: the Util class is out of 
+ * the scope of this task.
+ * 
  * Tasks: 
- *   1. Find a weakness in the program that calculates word frequency in the given input.
- *   2. How to sort the program output in the alphabetical and word frequency order.
- *   3. Design the program that would calculates word frequency in multiple threads.  
+ *   1. Compile and execute the program.
+ *   2. Assuming that the program generates the correct output, is there anything that can be improved?
+ *   3. If so, how would you change the program to make it better?
+ *   3. How would you sort the output in the alphabetical order? In the word frequency order?
+ *   4. Design the program that would calculate word frequency in multiple threads.
  *    
  */
 public class WordCounter {
 
-    public static void countWords(List<String> text, boolean printResults) {
+    /**
+     *  Countes the words in the input collection and prints the results,
+     *  if printResults parameter is set.
+     *  Every element in the collection contain is a word from the text.
+     */
+    public static void countWords(List<String> text, boolean printResults) {        
         List<String> words = new ArrayList<String>();
         List<Integer> counters = new ArrayList<Integer>();
 
@@ -29,7 +39,7 @@ public class WordCounter {
         }
         
         
-        // printing results       
+        // printing results 
         int count = 0;
         if (printResults) {
             for (int i = 0; i < words.size(); i++) {
@@ -41,13 +51,10 @@ public class WordCounter {
            
     }
     
-    @Override
-    public String toString() {
-        return "Simple";
-    }
     
     public static void main(String[] args) throws IOException {
         long time = System.currentTimeMillis();
+        // The utility method - is the implementation details
         List<String> text = Util.readTextFromFile("monte_cristo.txt");
         System.out.println("Initial reading: " + (System.currentTimeMillis() - time) + "ms");
         countWords(text, true);
