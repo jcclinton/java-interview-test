@@ -62,31 +62,50 @@ public class WordCounter {
         
         // printing results 
         trie.printWords(printResults);
-        /*
-        int count = 0;
-        if (printResults) {
-            for (int i = 0; i < words.size(); i++) {
-                System.out.print(words.get(i) + "=" + counters.get(i) + " ");           
-                count += counters.get(i);
-            }
-            System.out.println("\nTotal: " + count);
-        }*/
+        System.out.println("");
+           
+    }    
+    
+    public static void countWordsTrieByCount(List<String> text, boolean printResults) {        
+        Trie trie = new Trie();
+
+        for (String word : text) {
+        	trie.addString(word);
+        }
+        
+
+        if( printResults ){
+	    	List<Trie> words = new ArrayList<Trie>();
+	        words = trie.sortWordsByCount(true, words);
+	        for (int i = 0; i < words.size(); i++) {
+	        	trie = words.get(i);
+	        	trie.printWord();
+	        }
+	        System.out.println("");
+        }
            
     }
     
     
     public static void main(String[] args) throws IOException {
         long time = System.currentTimeMillis();
-        boolean printResults = false;
+        boolean printResults = true;
         // The utility method - is the implementation details
         //List<String> text = Util.readTextFromFile("test.txt");
         List<String> text = Util.readTextFromFile("monte_cristo.txt");
         System.out.println("Initial reading: " + (System.currentTimeMillis() - time) + "ms");
+        
+        time = System.currentTimeMillis();
         countWords(text, printResults);
         System.out.println("Time to process: " + (System.currentTimeMillis() - time) + "ms");
+        
         time = System.currentTimeMillis();
         countWordsTrie(text, printResults);
-        System.out.println("Time to process trie: " + (System.currentTimeMillis() - time) + "ms");
+        System.out.println("Time to process alph-sorted trie: " + (System.currentTimeMillis() - time) + "ms");
+        
+        time = System.currentTimeMillis();
+        countWordsTrieByCount(text, printResults);
+        System.out.println("Time to process count-sorted trie: " + (System.currentTimeMillis() - time) + "ms");
         
     }
     

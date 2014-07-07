@@ -1,12 +1,17 @@
 package test;
 
 import java.lang.String;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * implements a trie for storing strings/string prefixes
  *
  * @author Owen Astrachan
  * @version $Id: Trie.java,v 1.1 1996/12/01 00:07:21 ola Exp ola $
+ * 
+ * modified by Jamie Clinton, original source can be found at:
+ * https://www.cs.duke.edu/~ola/courses/cps108/fall96/joggle/trie/Trie.java
  *
  */
 
@@ -48,13 +53,18 @@ public class Trie
 	    if( index < 0 || index > ALPH){ continue; }
 	    if (t.myLinks[index] == null)
 	    {
-		t.myLinks[index] = new Trie( s.substring(0,k+1));
+		t.myLinks[index] = new Trie( s.substring(0,k+1) );
 	    }
 	    t = t.myLinks[index];
 	}
 	t.inc();
     }
     
+    
+    /**
+     * prints all words in all children of this trie
+     * @param print
+     */
     public void printWords(boolean print){
     	Trie t = this;
     	Trie child;
@@ -68,14 +78,47 @@ public class Trie
 		
 		if(t.count > 0){
 			if(print){
-				System.out.println(t.nodeWord + ": " + t.count);
+				System.out.print(t.nodeWord + "=" + t.count + " ");
 			}
 		}
+    }
+    
+    public List<Trie> sortWordsByCount(boolean topLevel, List<Trie> words){
+    	Trie t = this;
+    	Trie child;
+    	int i;
+    	if(t.count > 0){
+    		words.add(t);
+    	}
+    	for(i=0; i < ALPH; i++){
+    		if(t.myLinks[i] != null){
+    			child = t.myLinks[i];
+    			words = child.sortWordsByCount(false, words);
+    		}
+    	}
+    	
+    	
+    	if(topLevel){
+    		Collections.sort(words, new CustomComparator());
+    	}
+    	
+    	return words;
     }
     
     
     public void inc(){
     	count++;
+    }
+    
+    public int getCount(){
+    	return count;
+    }
+    
+    /**
+     * prints word for this node
+     */
+    public void printWord(){
+        System.out.print(this.nodeWord + "=" + this.count + " ");
     }
 
 
