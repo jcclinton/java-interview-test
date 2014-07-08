@@ -61,7 +61,7 @@ public class WordCounter {
         
         
         // printing results 
-        trie.printWords(printResults);
+        trie.printAll(printResults);
         System.out.println("");
            
     }    
@@ -75,11 +75,13 @@ public class WordCounter {
         
 
         if( printResults ){
-	    	List<Trie> words = new ArrayList<Trie>();
+					List<Trie> words = new ArrayList<Trie>();
 	        words = trie.sortWordsByCount(true, words);
+					// takes trie and puts all words into an array, sorted by word frequency
+					// then loops over them and prints them
 	        for (int i = 0; i < words.size(); i++) {
 	        	trie = words.get(i);
-	        	trie.printWord();
+	        	trie.printCurrentWord();
 	        }
 	        System.out.println("");
         }
@@ -89,7 +91,7 @@ public class WordCounter {
     
     public static void main(String[] args) throws IOException {
         long time = System.currentTimeMillis();
-        boolean printResults = true;
+        boolean printResults = false;
         // The utility method - is the implementation details
         //List<String> text = Util.readTextFromFile("test.txt");
         List<String> text = Util.readTextFromFile("monte_cristo.txt");

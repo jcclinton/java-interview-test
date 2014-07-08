@@ -65,14 +65,14 @@ public class Trie
      * prints all words in all children of this trie
      * @param print
      */
-    public void printWords(boolean print){
+    public void printAll(boolean print){
     	Trie t = this;
     	Trie child;
     	int i;
     	for(i=0; i < ALPH; i++){
     		if(t.myLinks[i] != null){
     			child = t.myLinks[i];
-    			child.printWords(print);
+    			child.printAll(print);
     		}
     	}
 		
@@ -117,7 +117,7 @@ public class Trie
     /**
      * prints word for this node
      */
-    public void printWord(){
+    public void printCurrentWord(){
         System.out.print(this.nodeWord + "=" + this.count + " ");
     }
 
