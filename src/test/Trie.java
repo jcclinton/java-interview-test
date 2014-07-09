@@ -4,6 +4,16 @@ import java.lang.String;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * implements a trie for storing strings/string prefixes
+ *
+ * @author Owen Astrachan
+ * @version $Id: Trie.java,v 1.1 1996/12/01 00:07:21 ola Exp ola $
+ * 
+ * modified by Jamie Clinton, original source can be found at:
+ * https://www.cs.duke.edu/~ola/courses/cps108/fall96/joggle/trie/Trie.java
+ *
+ */
 
 public class Trie
 {
